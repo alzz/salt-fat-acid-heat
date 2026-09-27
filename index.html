@@ -1,0 +1,623 @@
+<title>Salt Fat Acid Heat</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,700&display=swap">
+<style>
+:root{
+  --bg:#ECEEE7; --surface:#F8F8F3; --surface-2:#E3E6DC;
+  --ink:#22261F; --muted:#666B5C; --line:#D5D8CA;
+  --accent:#6B2E4D; --accent-ink:#fff;
+  --sabor-fg:#38562F; --sabor-bg:#DFE8D5;
+  --grasa-fg:#7E540A; --grasa-bg:#F0E4C6;
+  --cocc-fg:#8B3446; --cocc-bg:#F2DCDF;
+  --final-fg:#1B575E; --final-bg:#D6E7E7;
+  --wheel-paper:#ECEEE7; --wheel-ink:#2E2B22; --wheel-ink-soft:#8A8472;
+  --wheel-hub:#ECEEE7; --wheel-hub-line:var(--line);
+  --radius:10px;
+  --display:"Fraunces",Georgia,"Times New Roman",serif;
+  --sans:"Archivo",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#15170F; --surface:#1D2019; --surface-2:#272B21;
+    --ink:#E9EADF; --muted:#9DA292; --line:#333829;
+    --accent:#E39CBE; --accent-ink:#24101B;
+    --sabor-fg:#AECC9D; --sabor-bg:#26321F;
+    --grasa-fg:#E2B75F; --grasa-bg:#342A14;
+    --cocc-fg:#EA9CA9; --cocc-bg:#351D23;
+    --final-fg:#8AC8CD; --final-bg:#16302F;
+    --wheel-paper:#15170F; --wheel-ink:#EDEADE; --wheel-ink-soft:#8C9280;
+    --wheel-hub:#15170F; --wheel-hub-line:var(--line);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#15170F; --surface:#1D2019; --surface-2:#272B21;
+  --ink:#E9EADF; --muted:#9DA292; --line:#333829;
+  --accent:#E39CBE; --accent-ink:#24101B;
+  --sabor-fg:#AECC9D; --sabor-bg:#26321F;
+  --grasa-fg:#E2B75F; --grasa-bg:#342A14;
+  --cocc-fg:#EA9CA9; --cocc-bg:#351D23;
+  --final-fg:#8AC8CD; --final-bg:#16302F;
+  --wheel-paper:#15170F; --wheel-ink:#EDEADE; --wheel-ink-soft:#8C9280;
+  --wheel-hub:#15170F; --wheel-hub-line:var(--line);
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.5;
+  -webkit-text-size-adjust:100%}
+.wrap{max-width:880px;margin:0 auto;padding-inline:20px;padding-block:0 56px}
+a{color:inherit}
+h1,h2,h3{font-family:var(--display);font-weight:700;text-wrap:balance;margin:0;letter-spacing:-.015em}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+
+/* --- cabecera --- */
+.masthead{padding-block:26px 20px;display:flex;align-items:center;gap:12px}
+#theme{margin-left:auto;flex:none;width:36px;height:36px;display:inline-flex;align-items:center;
+  justify-content:center;border:1px solid var(--line);border-radius:9px;background:transparent;
+  color:var(--muted);cursor:pointer}
+#theme:hover{background:var(--surface-2);color:var(--ink)}
+#theme svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.7;
+  stroke-linecap:round;stroke-linejoin:round}
+.wordmark{font-family:var(--display);font-weight:700;font-size:30px;letter-spacing:-.03em;
+  text-decoration:none;line-height:1;font-variation-settings:"SOFT" 30}
+.wordmark em{font-style:italic;color:var(--accent)}
+
+.tabs{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--line);border-radius:var(--radius);
+  padding:4px;gap:4px;margin-bottom:22px}
+.tabs a{text-align:center;padding:7px 10px;border-radius:7px;text-decoration:none;font-size:14px;
+  font-weight:600;color:var(--muted);transition:background .15s,color .15s}
+.tabs a[aria-selected="true"]{background:var(--surface-2);color:var(--ink)}
+.subtabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:20px}
+.subtabs a{font-size:13px;font-weight:600;padding:5px 12px;border-radius:999px;text-decoration:none;
+  border:1px solid var(--line);color:var(--muted)}
+.subtabs a[aria-selected="true"]{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+
+/* --- buscador --- */
+.searchbar{display:flex;gap:8px;align-items:stretch}
+.searchbar label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+#search{flex:1;min-width:0;font:inherit;font-size:17px;padding:12px 14px;border-radius:var(--radius);
+  border:1px solid var(--line);background:var(--surface);color:var(--ink)}
+#search::placeholder{color:var(--muted)}
+.btn{font:inherit;font-size:14px;font-weight:600;padding:0 16px;border-radius:var(--radius);
+  border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer}
+.btn:hover{background:var(--surface-2)}
+.filters{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.filters button{font:inherit;font-size:12px;font-weight:600;letter-spacing:.03em;padding:5px 11px;
+  border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--muted);cursor:pointer}
+.filters button[aria-pressed="true"]{border-color:currentColor}
+.filters button.f-sabor[aria-pressed="true"]{background:var(--sabor-bg);color:var(--sabor-fg)}
+.filters button.f-grasa[aria-pressed="true"]{background:var(--grasa-bg);color:var(--grasa-fg)}
+.filters button.f-cocc[aria-pressed="true"]{background:var(--cocc-bg);color:var(--cocc-fg)}
+.filters button.f-final[aria-pressed="true"]{background:var(--final-bg);color:var(--final-fg)}
+.count{margin:16px 0 8px;font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);
+  font-weight:600;font-variant-numeric:tabular-nums}
+
+/* --- tabla --- */
+.tablebox{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface)}
+table{width:100%;border-collapse:collapse;font-size:15px}
+th{text-align:left;font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);
+  font-weight:600;padding:10px 14px;border-bottom:1px solid var(--line);white-space:nowrap;
+  position:sticky;top:0;background:var(--surface)}
+td{padding:10px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+th:first-child,td:first-child{width:24%;min-width:150px}
+.tags{display:flex;flex-wrap:wrap;gap:4px}
+td.regions{font-size:14px;color:var(--muted);line-height:1.65}
+td.regions a{color:inherit;text-decoration:none;font-weight:400}
+td.regions a:hover{color:var(--ink);text-decoration:underline;text-underline-offset:2px}
+td.regions .sep{opacity:.45}
+tr:last-child td{border-bottom:0}
+tbody tr:hover{background:var(--surface-2)}
+td a{text-decoration:none;font-weight:500}
+td a:hover{text-decoration:underline;text-underline-offset:2px}
+.empty{padding:36px 14px;text-align:center;color:var(--muted);font-size:15px}
+
+/* --- etiquetas de categoría --- */
+.tag{display:inline-block;font-size:11.5px;font-weight:600;letter-spacing:.02em;padding:3px 9px;
+  border-radius:5px;white-space:nowrap}
+.t-sabor{background:var(--sabor-bg);color:var(--sabor-fg)}
+.t-grasa{background:var(--grasa-bg);color:var(--grasa-fg)}
+.t-cocc{background:var(--cocc-bg);color:var(--cocc-fg)}
+.t-final{background:var(--final-bg);color:var(--final-fg)}
+
+/* --- explorar --- */
+.crumbs{font-size:12.5px;color:var(--muted);margin-bottom:10px}
+.crumbs a{text-decoration:none}
+.crumbs a:hover{text-decoration:underline}
+.crumbs span{margin:0 6px;opacity:.5}
+.page-title{font-size:30px;margin-bottom:22px}
+.sub{color:var(--muted);font-size:14px;margin:0 0 22px}
+.sub a{color:var(--accent)}
+
+details.cat{border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);
+  margin-bottom:10px;overflow:hidden}
+details.cat > summary{cursor:pointer;list-style:none;padding:14px 16px;display:flex;align-items:baseline;
+  gap:10px;font-family:var(--display);font-weight:700;font-size:19px}
+details.cat > summary::-webkit-details-marker{display:none}
+details.cat > summary::after{content:"+";margin-left:auto;font-family:var(--sans);font-weight:400;
+  font-size:20px;color:var(--muted)}
+details.cat[open] > summary::after{content:"–"}
+details.cat > summary .n{font-family:var(--sans);font-size:12px;font-weight:600;color:var(--muted);
+  font-variant-numeric:tabular-nums}
+.catbody{padding:0 16px 16px;display:flex;flex-direction:column;gap:14px}
+.regblock h4{margin:0 0 6px;font-family:var(--sans);font-size:11px;letter-spacing:.09em;
+  text-transform:uppercase;color:var(--muted);font-weight:600}
+.regblock h4 a{text-decoration:none}
+.inline-list{display:flex;flex-wrap:wrap;gap:6px}
+.pill{font-size:14px;text-decoration:none;padding:3px 10px;border-radius:999px;border:1px solid var(--line)}
+.pill:hover{background:var(--surface-2)}
+
+.alpha{display:flex;flex-direction:column;gap:18px}
+.alpha-group{display:grid;grid-template-columns:34px 1fr;gap:12px;align-items:start}
+.alpha-letter{font-family:var(--display);font-size:24px;font-weight:700;color:var(--accent);line-height:1.1}
+.linklist{columns:2;column-gap:24px}
+.linklist a{display:block;text-decoration:none;padding:3px 0;break-inside:avoid;font-size:15px}
+.linklist a:hover{text-decoration:underline;text-underline-offset:2px}
+
+.regiongrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px}
+.regiongrid a{display:flex;justify-content:space-between;align-items:baseline;gap:10px;
+  border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);
+  padding:11px 14px;text-decoration:none;font-weight:500}
+.regiongrid a:hover{background:var(--surface-2)}
+.regiongrid .n{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+
+/* --- fichas --- */
+.group{margin-bottom:24px}
+.group-head{display:flex;align-items:baseline;gap:10px;margin-bottom:10px;
+  padding-bottom:6px;border-bottom:1px solid var(--line)}
+.group-head h3{font-size:17px}
+.group-head .n{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums;margin-left:auto}
+.pairs{display:flex;flex-direction:column;gap:2px}
+.pair{display:flex;align-items:center;flex-wrap:wrap;gap:6px 10px;padding:7px 12px;border-radius:8px;
+  text-decoration:none;background:var(--surface);border:1px solid var(--line)}
+.pair:hover{background:var(--surface-2)}
+.pair .name{font-weight:500}
+.pair .tag{margin-left:auto}
+.mates{display:flex;flex-direction:column;gap:6px}
+.mate{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:9px 12px}
+.mate-top{display:flex;align-items:center;flex-wrap:wrap;gap:6px 10px}
+.mate-name{font-weight:500;text-decoration:none}
+.mate-name:hover{text-decoration:underline;text-underline-offset:2px}
+.mate-regs{margin:5px 0 0;font-size:13.5px;color:var(--muted);line-height:1.6}
+.mate-regs a{color:inherit;text-decoration:none}
+.mate-regs a:hover{color:var(--ink);text-decoration:underline;text-underline-offset:2px}
+.mate-regs .sep{opacity:.45}
+
+
+
+/* --- ruedas --- */
+body{overflow-x:hidden}
+.bleed{position:relative;left:50%;transform:translateX(-50%);width:100vw;padding-inline:16px}
+.wheelbox{overflow-x:auto;max-width:1128px;margin:0 auto;}
+.wheelbox svg{display:block;margin:0 auto}
+.wheelbox path{stroke:var(--wheel-paper);stroke-width:.7;stroke-linejoin:round}
+.ring-reg path{stroke-width:1.6}
+.ring-cont path{stroke-width:2.4}
+.wheelbox a{cursor:pointer}
+.wheelbox a:hover path{stroke:var(--wheel-ink);stroke-width:1.4}
+.ring-reg a:hover path,.ring-cont a:hover path{stroke-width:2.4}
+.wheelbox text{font-family:var(--sans);fill:var(--wheel-ink);pointer-events:none}
+.lbl-reg{font-weight:600}
+.lbl-cont{font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+.lbl-hub{font-family:var(--display);font-weight:700}
+.lbl-hub-n{fill:var(--wheel-ink-soft)}
+.hub{fill:var(--wheel-hub);stroke:var(--wheel-hub-line);stroke-width:1.5}
+.wheel-hint{max-width:1128px;margin:8px auto 0;font-size:12px;color:var(--muted);text-align:center}
+@media (min-width:1180px){.wheel-hint{display:none}}
+@media (max-width:560px){
+  .wordmark{font-size:25px}
+  .page-title{font-size:25px}
+  .linklist{columns:1}
+  .alpha-group{grid-template-columns:26px 1fr;gap:8px}
+  td,th{padding-inline:10px}
+  table{font-size:14px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+<div class="wrap">
+  <header class="masthead">
+    <a class="wordmark" href="#/">Salt Fat Acid <em>Heat</em></a>
+    <button id="theme" type="button"></button>
+  </header>
+
+  <nav class="tabs" id="tabs">
+    <a href="#/" id="tab-buscar">Buscar</a>
+    <a href="#/explorar/categorias" id="tab-explorar">Explorar</a>
+    <a href="#/ruedas/sabor" id="tab-ruedas">Ruedas</a>
+  </nav>
+
+  <main id="view"></main>
+</div>
+
+<script>
+const DATA = [["Aceite de cacahuete","aceite-de-cacahuete","Grasa","África Occidental","africa-occidental"],["Aceite de cebolleta","aceite-de-cebolleta","Grasa","China","china"],["Aceite de coco","aceite-de-coco","Grasa","África Occidental","africa-occidental"],["Aceite de coco","aceite-de-coco","Grasa","Caribe","caribe"],["Aceite de coco","aceite-de-coco","Grasa","India","india"],["Aceite de coco","aceite-de-coco","Grasa","Tailandia","tailandia"],["Aceite de oliva","aceite-de-oliva","Grasa","Argentina y Uruguay","argentina-y-uruguay"],["Aceite de oliva","aceite-de-oliva","Grasa","Brasil","brasil"],["Aceite de oliva","aceite-de-oliva","Grasa","EE. UU. y Canadá","ee-uu-y-canada"],["Aceite de oliva","aceite-de-oliva","Grasa","España","espana"],["Aceite de oliva","aceite-de-oliva","Grasa","Europa del Este","europa-del-este"],["Aceite de oliva","aceite-de-oliva","Grasa","Francia","francia"],["Aceite de oliva","aceite-de-oliva","Grasa","Grecia y Chipre","grecia-y-chipre"],["Aceite de oliva","aceite-de-oliva","Grasa","Italia","italia"],["Aceite de oliva","aceite-de-oliva","Grasa","Mediterráneo","mediterraneo"],["Aceite de oliva","aceite-de-oliva","Grasa","Norte de África","norte-de-africa"],["Aceite de oliva","aceite-de-oliva","Grasa","Reino Unido","reino-unido"],["Aceite de palma","aceite-de-palma","Grasa","África Occidental","africa-occidental"],["Aceite de palma","aceite-de-palma","Grasa","Brasil","brasil"],["Aceite de palma","aceite-de-palma","Grasa","Tailandia","tailandia"],["Aceite de pepita de uva","aceite-de-pepita-de-uva","Grasa","India","india"],["Aceite de semilla de sandía","aceite-de-semilla-de-sandia","Grasa","África Occidental","africa-occidental"],["Aceite de sésamo","aceite-de-sesamo","Grasa","China","china"],["Aceite de sésamo","aceite-de-sesamo","Grasa","Corea","corea"],["Aceite de sésamo","aceite-de-sesamo","Grasa","Cuerno de África","cuerno-de-africa"],["Aceite de sésamo","aceite-de-sesamo","Grasa","Japón","japon"],["Aceite neutro","aceite-neutro","Grasa","Alemania","alemania"],["Aceite neutro","aceite-neutro","Grasa","Brasil","brasil"],["Aceite neutro","aceite-neutro","Grasa","Caribe","caribe"],["Aceite neutro","aceite-neutro","Grasa","Centroamérica","centroamerica"],["Aceite neutro","aceite-neutro","Grasa","Chile, Perú y Bolivia","chile-peru-y-bolivia"],["Aceite neutro","aceite-neutro","Grasa","China","china"],["Aceite neutro","aceite-neutro","Grasa","Corea","corea"],["Aceite neutro","aceite-neutro","Grasa","Cuerno de África","cuerno-de-africa"],["Aceite neutro","aceite-neutro","Grasa","EE. UU. y Canadá","ee-uu-y-canada"],["Aceite neutro","aceite-neutro","Grasa","Escandinavia","escandinavia"],["Aceite neutro","aceite-neutro","Grasa","Europa del Este","europa-del-este"],["Aceite neutro","aceite-neutro","Grasa","Irán","iran"],["Aceite neutro","aceite-neutro","Grasa","Japón","japon"],["Aceite neutro","aceite-neutro","Grasa","México","mexico"],["Aceite neutro","aceite-neutro","Grasa","Reino Unido","reino-unido"],["Aceite neutro","aceite-neutro","Grasa","Tailandia","tailandia"],["Aceite neutro","aceite-neutro","Grasa","Vietnam","vietnam"],["Aceituna","aceituna","Ácido final","Grecia y Chipre","grecia-y-chipre"],["Aceitunas","aceitunas","Ácido final","España","espana"],["Aceitunas","aceitunas","Ácido final","Francia","francia"],["Aceitunas","aceitunas","Ácido final","Italia","italia"],["Aceitunas","aceitunas","Ácido final","México","mexico"],["Aceitunas","aceitunas","Ácido final","Norte de África","norte-de-africa"],["Adobo","adobo","Sabor","África Occidental","africa-occidental"],["Advieh","advieh","Sabor","Irán","iran"],["Agracejos","agracejos","Ácido final","Irán","iran"],["Agua de azahar","agua-de-azahar","Sabor","Irán","iran"],["Ajedrea","ajedrea","Sabor","Europa del Este","europa-del-este"],["Ají","aji","Sabor","Chile, Perú y Bolivia","chile-peru-y-bolivia"],["Ajo","ajo","Sabor","China","china"],["Ajo","ajo","Sabor","Corea","corea"],["Albahaca","albahaca","Sabor","Caribe","caribe"],["Albahaca","albahaca","Sabor","Chile, Perú y Bolivia","chile-peru-y-bolivia"],["Albahaca","albahaca","Sabor","España","espana"],["Albahaca","albahaca","Sabor","Francia","francia"],["Albahaca","albahaca","Sabor","Grecia y Chipre","grecia-y-chipre"],["Albahaca","albahaca","Sabor","Irán","iran"],["Albahaca","albahaca","Sabor","Italia","italia"],["Albahaca tailandesa","albahaca-tailandesa","Sabor","Tailandia","tailandia"],["Albahaca tailandesa","albahaca-tailandesa","Sabor","Vietnam","vietnam"],["Alcaparras en vinagre","alcaparras-en-vinagre","Ácido final","Escandinavia","escandinavia"],["Alcaravea","alcaravea","Sabor","Alemania","alemania"],["Anís","anis","Sabor","Alemania","alemania"],["Anís","anis","Sabor","India","india"],["Anís estrellado","anis-estrellado","Sabor","China","china"],["Anís estrellado","anis-estrellado","Sabor","Vietnam","vietnam"],["Apio","apio","Sabor","EE. UU. y Canadá","ee-uu-y-canada"],["Apio","apio","Sabor","Reino Unido","reino-unido"],["Arenque en escabeche","arenque-en-escabeche","Ácido final","Escandinavia","escandinavia"],["Azafrán","azafran","Sabor","Brasil","brasil"],["Azafrán","azafran","Sabor","Caribe","caribe"],["Azafrán","azafran","Sabor","Escandinavia","escandinavia"],["Azafrán","azafran","Sabor","España","espana"],["Azafrán","azafran","Sabor","India","india"],["Azafrán","azafran","Sabor","Irán","iran"],["Azafrán","azafran","Sabor","Italia","italia"],["Azafrán","azafran","Sabor","Norte de África","norte-de-africa"],["Baharat","baharat","Sabor","Mediterráneo","mediterraneo"],["Bayas","bayas","Ácido final","Escandinavia","escandinavia"],["Bayas de enebro","bayas-de-enebro","Sabor","Escandinavia","escandinavia"],["Beicon y jamón","beicon-y-jamon","Ácido final","EE. UU. y Canadá","ee-uu-y-canada"],["Berenjena encurtida","berenjena-encurtida","Ácido final","Argentina y Uruguay","argentina-y-uruguay"],["Berenjena encurtida","berenjena-encurtida","Ácido final","Caribe","caribe"],["Brown sauce","brown-sauce","Ácido final","Reino Unido","reino-unido"],["Cacahuetes","cacahuetes","Sabor","África Occidental","africa-occidental"],["Callaloo","callaloo","Sabor","Caribe","caribe"],["Canela","canela","Sabor","Alemania","alemania"],["Canela","canela","Sabor","EE. UU. y Canadá","ee-uu-y-canada"],["Canela","canela","Sabor","Escandinavia","escandinavia"],["Canela","canela","Sabor","Europa del Este","europa-del-este"],["Canela","canela","Sabor","India","india"],["Canela","canela","Sabor","México","mexico"],["Canela","canela","Sabor","Norte de África","norte-de-africa"],["Canela","canela","Sabor","Reino Unido","reino-unido"],["Cardamomo","cardamomo","Sabor","Brasil","brasil"],["Cardamomo","cardamomo","Sabor","Escandinavia","escandinavia"],["Cardamomo","cardamomo","Sabor","India","india"],["Cardamomo","cardamomo","Sabor","Irán","iran"],["Cardamomo","cardamomo","Sabor","Reino Unido","reino-unido"],["Cayena","cayena","Sabor","EE. UU. y Canadá","ee-uu-y-canada"],["Cebolletas","cebolletas","Sabor","Vietnam","vietnam"],["Cebollino","cebollino","Sabor","Alemania","alemania"],["Cerveza","cerveza","Ácido de cocción","África Occidental","africa-occidental"],["Cerveza","cerveza","Ácido de cocción","Alemania","alemania"],["Cerveza","cerveza","Ácido de cocción","Argentina y Uruguay","argentina-y-uruguay"],["Cerveza","cerveza","Ácido de cocción","Centroamérica","centroamerica"],["Cerveza","cerveza","Ácido de cocción","Corea","corea"],["Cerveza","cerveza","Ácido de cocción","Cuerno de África","cuerno-de-africa"],["Cerveza","cerveza","Ácido de cocción","EE. UU. y Canadá","ee-uu-y-canada"],["Cerveza","cerveza","Ácido de cocción","Escandinavia","escandinavia"],["Cerveza","cerveza","Ácido de cocción","Europa del Este","europa-del-este"],["Cerveza","cerveza","Ácido de cocción","Grecia y Chipre","grecia-y-chipre"],["Cerveza","cerveza","Ácido de cocción","India","india"],["Cerveza","cerveza","Ácido de cocción","Mediterráneo","mediterraneo"],["Cerveza","cerveza","Ácido de cocción","México","mexico"],["Cerveza","cerveza","Ácido de cocción","Reino Unido","reino-unido"],["Cerveza","cerveza","Ácido de cocción","Tailandia","tailandia"],["Cerveza","cerveza","Ácido de cocción","Vietnam","vietnam"],["Chalotas encurtidas","chalotas-encurtidas","Ácido final","Vietnam","vietnam"],["Cheddar y queso crema","cheddar-y-queso-crema","Ácido final","EE. UU. y Canadá","ee-uu-y-canada"],["Cheddar y stilton","cheddar-y-stilton","Ácido final","Reino Unido","reino-unido"],["Chermoula","chermoula","Ácido final","Norte de África","norte-de-africa"],["Chiles","chiles","Sabor","Argentina y Uruguay","argentina-y-uruguay"],["Chiles","chiles","Sabor","Brasil","brasil"],["Chiles","chiles","Sabor","Centroamérica","centroamerica"],["Chiles","chiles","Sabor","Chile, Perú y Bolivia","chile-peru-y-bolivia"],["Chiles","chiles","Sabor","China","china"],["Chiles","chiles","Sabor","Corea","corea"],["Chiles","chiles","Sabor","EE. UU. y Canadá","ee-uu-y-canada"],["Chiles","chiles","Sabor","España","espana"],["Chiles","chiles","Sabor","India","india"],["Chiles","chiles","Sabor","Italia","italia"],["Chiles","chiles","Sabor","Japón","japon"],["Chiles","chiles","Sabor","Tailandia","tailandia"],["Chiles","chiles","Sabor","Vietnam","vietnam"],["Chiles frescos","chiles-frescos","Sabor","México","mexico"],["Chiles picantes","chiles-picantes","Sabor","Caribe","caribe"],["Chiles secos","chiles-secos","Sabor","México","mexico"],["Chimichurri","chimichurri","Ácido final","Argentina y Uruguay","argentina-y-uruguay"],["Chimichurri","chimichurri","Ácido final","Caribe","caribe"],["Chocolate","chocolate","Ácido final","México","mexico"],["Chorizo","chorizo","Ácido final","España","espana"],["Chorizo","chorizo","Ácido final","México","mexico"],["Chucrut","chucrut","Ácido final","Alemania","alemania"],["Chutneys","chutneys","Ácido final","India","india"],["Cilantro","cilantro","Sabor","Brasil","brasil"],["Cilantro","cilantro","Sabor","Centroamérica","centroamerica"],["Cilantro","cilantro","Sabor","Chile, Perú y Bolivia","chile-peru-y-bolivia"],["Cilantro","cilantro","Sabor","España","espana"],["Cilantro","cilantro","Sabor","India","india"],["Cilantro","cilantro","Sabor","Irán","iran"],["Cilantro","cilantro","Sabor","México","mexico"],["Cilantro","cilantro","Sabor","Norte de África","norte-de-africa"],["Cilantro","cilantro","Sabor","Tailandia","tailandia"],["Cilantro","cilantro","Sabor","Vietnam","vietnam"],["Cinco especias","cinco-especias","Sabor","China","china"],["Clavo","clavo","Sabor","México","mexico"],["Clavos de olor","clavos-de-olor","Sabor","Brasil","brasil"],["Clavos de olor","clavos-de-olor","Sabor","Europa del Este","europa-del-este"],["Clavos de olor","clavos-de-olor","Sabor","India","india"],["Col agria","col-agria","Ácido final","Europa del Este","europa-del-este"],["Comino","comino","Sabor","Caribe","caribe"],["Comino","comino","Sabor","India","india"],["Comino","comino","Sabor","Irán","iran"],["Comino","comino","Sabor","Mediterráneo","mediterraneo"],["Comino","comino","Sabor","México","mexico"],["Comino","comino","Sabor","Norte de África","norte-de-africa"],["Comino","comino","Sabor","Tailandia","tailandia"],["Crema agria","crema-agria","Ácido final","Alemania","alemania"],["Crema agria","crema-agria","Ácido final","Europa del Este","europa-del-este"],["Crema agria","crema-agria","Ácido final","México","mexico"],["Crème fraîche","creme-fraiche","Ácido final","Francia","francia"],["Cúrcuma","curcuma","Sabor","Centroamérica","centroamerica"],["Cúrcuma","curcuma","Sabor","India","india"],["Cúrcuma","curcuma","Sabor","Tailandia","tailandia"],["Curry","curry","Sabor","África Occidental","africa-occidental"],["Curry","curry","Sabor","India","india"],["Curry en polvo","curry-en-polvo","Sabor","Caribe","caribe"],["Curry en polvo","curry-en-polvo","Sabor","Reino Unido","reino-unido"],["Currys","currys","Sabor","India","india"],["Curtido (col fermentada)","curtido-col-fermentada","Ácido final","Centroamérica","centroamerica"],["Dukkah","dukkah","Sabor","Norte de África","norte-de-africa"],["Dulce de leche","dulce-de-leche","Ácido final","México","mexico"],["Encurtidos","encurtidos","Ácido final","Alemania","alemania"],["Encurtidos","encurtidos","Ácido final","EE. UU. y Canadá","ee-uu-y-canada"],["Encurtidos","encurtidos","Ácido final","Escandinavia","escandinavia"],["Encurtidos","encurtidos","Ácido final","Europa del Este","europa-del-este"],["Encurtidos","encurtidos","Ácido final","Irán","iran"],["Encurtidos","encurtidos","Ácido final","Japón","japon"],["Encurtidos","encurtidos","Ácido final","Mediterráneo","mediterraneo"],["Encurtidos","encurtidos","Ácido final","México","mexico"],["Encurtidos","encurtidos","Ácido final","Norte de África","norte-de-africa"],["Encurtidos","encurtidos","Ácido final","Tailandia","tailandia"],["Encurtidos variados","encurtidos-variados","Ácido final","India","india"],["Enebro","enebro","Sabor","Alemania","alemania"],["Enebro","enebro","Sabor","Europa del Este","europa-del-este"],["Eneldo","eneldo","Sabor","EE. UU. y Canadá","ee-uu-y-canada"],["Eneldo","eneldo","Sabor","Escandinavia","escandinavia"],["Eneldo","eneldo","Sabor","Europa del Este","europa-del-este"],["Eneldo","eneldo","Sabor","Grecia y Chipre","grecia-y-chipre"],["Eneldo","eneldo","Sabor","Irán","iran"],["Eneldo","eneldo","Sabor","Reino Unido","reino-unido"],["Epazote","epazote","Sabor","Centroamérica","centroamerica"],["Epazote","epazote","Sabor","México","mexico"],["Especias bérbere","especias-berbere","Sabor","Cuerno de África","cuerno-de-africa"],["Especias jerk","especias-jerk","Sabor","Caribe","caribe"],["Estragón","estragon","Sabor","España","espana"],["Estragón","estragon","Sabor","Francia","francia"],["Estragón","estragon","Sabor","Irán","iran"],["Fruta seca","fruta-seca","Ácido final","Argentina y Uruguay","argentina-y-uruguay"],["Fruta seca","fruta-seca","Ácido final","Caribe","caribe"],["Fruta seca","fruta-seca","Ácido final","Irán","iran"],["Fruta seca","fruta-seca","Ácido final","Norte de África","norte-de-africa"],["Galanga","galanga","Sabor","Tailandia","tailandia"],["Garam masala","garam-masala","Sabor","India","india"],["Gochujang (pasta de chile)","gochujang-pasta-de-chile","Ácido final","Corea","corea"],["Granadas","granadas","Ácido final","Irán","iran"],["Granadas","granadas","Ácido final","Mediterráneo","mediterraneo"],["Grasa de beicon","grasa-de-beicon","Grasa","EE. UU. y Canadá","ee-uu-y-canada"],["Grasa de cerdo","grasa-de-cerdo","Grasa","Alemania","alemania"],["Grasa de cerdo","grasa-de-cerdo","Grasa","España","espana"],["Gruyère","gruyere","Ácido final","Francia","francia"],["Guayaba","guayaba","Ácido final","Cuerno de África","cuerno-de-africa"],["Halloumi","halloumi","Ácido final","Grecia y Chipre","grecia-y-chipre"],["Harissa","harissa","Ácido final","Norte de África","norte-de-africa"],["Harissa","harissa","Sabor","Norte de África","norte-de-africa"],["Havarti","havarti","Ácido final","Escandinavia","escandinavia"],["Hibisco","hibisco","Sabor","Caribe","caribe"],["Hierba limón","hierba-limon","Sabor","Tailandia","tailandia"],["Hierba limón","hierba-limon","Sabor","Vietnam","vietnam"],["Hierbas de Provenza","hierbas-de-provenza","Sabor","Francia","francia"],["Hinojo","hinojo","Sabor","Mediterráneo","mediterraneo"],["Hoja de laurel","hoja-de-laurel","Sabor","Alemania","alemania"],["Hoja de laurel","hoja-de-laurel","Sabor","Escandinavia","escandinavia"],["Hoja de laurel","hoja-de-laurel","Sabor","España","espana"],["Hojas de eneldo","hojas-de-eneldo","Sabor","Alemania","alemania"],["Hojas de hinojo","hojas-de-hinojo","Sabor","Italia","italia"],["Hojas de laurel","hojas-de-laurel","Sabor","Caribe","caribe"],["Huacatay","huacatay","Sabor","Chile, Perú y Bolivia","chile-peru-y-bolivia"],["Injera y canjeero","injera-y-canjeero","Ácido final","Cuerno de África","cuerno-de-africa"],["Jengibre","jengibre","Sabor","África Occidental","africa-occidental"],["Jengibre","jengibre","Sabor","Alemania","alemania"],["Jengibre","jengibre","Sabor","Brasil","brasil"],["Jengibre","jengibre","Sabor","Caribe","caribe"],["Jengibre","jengibre","Sabor","China","china"],["Jengibre","jengibre","Sabor","Corea","corea"],["Jengibre","jengibre","Sabor","Escandinavia","escandinavia"],["Jengibre","jengibre","Sabor","Europa del Este","europa-del-este"],["Jengibre","jengibre","Sabor","India","india"],["Jengibre","jengibre","Sabor","Japón","japon"],["Jengibre","jengibre","Sabor","Reino Unido","reino-unido"],["Jengibre","jengibre","Sabor","Tailandia","tailandia"],["Jengibre","jengibre","Sabor","Vietnam","vietnam"],["Jerez","jerez","Ácido de cocción","España","espana"],["Kétchup","ketchup","Ácido final","Reino Unido","reino-unido"],["Kimchi","kimchi","Ácido final","Corea","corea"],["Kombu","kombu","Sabor","Japón","japon"],["La kama","la-kama","Sabor","Norte de África","norte-de-africa"],["Labneh","labneh","Ácido final","Mediterráneo","mediterraneo"],["Laurel","laurel","Sabor","Francia","francia"],["Lavanda","lavanda","Sabor","España","espana"],["Lavanda","lavanda","Sabor","Francia","francia"],["Leche de coco","leche-de-coco","Grasa","Caribe","caribe"],["Licor moutai","licor-moutai","Ácido de cocción","China","china"],["Lima","lima","Ácido de cocción","Caribe","caribe"],["Lima","lima","Ácido de cocción","Centroamérica","centroamerica"],["Lima","lima","Ácido de cocción","Chile, Perú y Bolivia","chile-peru-y-bolivia"],["Lima","lima","Ácido de cocción","India","india"],["Lima","lima","Ácido de cocción","Irán","iran"],["Lima","lima","Ácido de cocción","Mediterráneo","mediterraneo"],["Lima","lima","Ácido de cocción","México","mexico"],["Lima","lima","Ácido de cocción","Norte de África","norte-de-africa"],["Lima","lima","Ácido de cocción","Vietnam","vietnam"],["Lima kaffir","lima-kaffir","Sabor","Tailandia","tailandia"],["Lima seca","lima-seca","Sabor","Irán","iran"],["Limón","limon","Ácido de cocción","Argentina y Uruguay","argentina-y-uruguay"],["Limón","limon","Ácido de cocción","Brasil","brasil"],["Limón","limon","Ácido de cocción","Caribe","caribe"],["Limón","limon","Ácido de cocción","España","espana"],["Limón","limon","Ácido de cocción","Francia","francia"],["Limón","limon","Ácido de cocción","Grecia y Chipre","grecia-y-chipre"],["Limón","limon","Ácido de cocción","Irán","iran"],["Limón","limon","Ácido de cocción","Italia","italia"],["Limón","limon","Ácido de cocción","Mediterráneo","mediterraneo"],["Limón","limon","Ácido de cocción","Norte de África","norte-de-africa"],["Limón en conserva","limon-en-conserva","Ácido final","Norte de África","norte-de-africa"],["Manchego","manchego","Ácido final","España","espana"],["Manchego y provolone","manchego-y-provolone","Ácido final","Argentina y Uruguay","argentina-y-uruguay"],["Manchego y provolone","manchego-y-provolone","Ácido final","Caribe","caribe"],["Mango","mango","Ácido final","Cuerno de África","cuerno-de-africa"],["Manteca de cerdo","manteca-de-cerdo","Grasa","Brasil","brasil"],["Manteca de cerdo","manteca-de-cerdo","Grasa","Centroamérica","centroamerica"],["Manteca de cerdo","manteca-de-cerdo","Grasa","EE. UU. y Canadá","ee-uu-y-canada"],["Manteca de cerdo","manteca-de-cerdo","Grasa","Francia","francia"],["Manteca de cerdo","manteca-de-cerdo","Grasa","Italia","italia"],["Manteca de cerdo","manteca-de-cerdo","Grasa","México","mexico"],["Manteca de cerdo","manteca-de-cerdo","Grasa","Tailandia","tailandia"],["Manteca de karité","manteca-de-karite","Grasa","África Occidental","africa-occidental"],["Mantequilla","mantequilla","Grasa","Alemania","alemania"],["Mantequilla","mantequilla","Grasa","EE. UU. y Canadá","ee-uu-y-canada"],["Mantequilla","mantequilla","Grasa","Escandinavia","escandinavia"],["Mantequilla","mantequilla","Grasa","Europa del Este","europa-del-este"],["Mantequilla","mantequilla","Grasa","Francia","francia"],["Mantequilla","mantequilla","Grasa","Italia","italia"],["Mantequilla","mantequilla","Grasa","Reino Unido","reino-unido"],["Mantequilla clarificada","mantequilla-clarificada","Grasa","India","india"],["Mantequilla clarificada","mantequilla-clarificada","Grasa","Irán","iran"],["Maracuyá","maracuya","Ácido final","Brasil","brasil"],["Mejorana","mejorana","Sabor","Mediterráneo","mediterraneo"],["Menta","menta","Sabor","EE. UU. y Canadá","ee-uu-y-canada"],["Menta","menta","Sabor","Grecia y Chipre","grecia-y-chipre"],["Menta","menta","Sabor","India","india"],["Menta","menta","Sabor","Irán","iran"],["Menta","menta","Sabor","Norte de África","norte-de-africa"],["Menta","menta","Sabor","Reino Unido","reino-unido"],["Menta","menta","Sabor","Tailandia","tailandia"],["Menta","menta","Sabor","Vietnam","vietnam"],["Menta seca","menta-seca","Sabor","Mediterráneo","mediterraneo"],["Miel","miel","Ácido de cocción","África Occidental","africa-occidental"],["Miso","miso","Ácido final","Japón","japon"],["Mitmita","mitmita","Sabor","Cuerno de África","cuerno-de-africa"],["Mole","mole","Ácido final","México","mexico"],["Mostaza","mostaza","Ácido final","Alemania","alemania"],["Mostaza","mostaza","Sabor","Centroamérica","centroamerica"],["Mostaza","mostaza","Ácido final","EE. UU. y Canadá","ee-uu-y-canada"],["Mostaza","mostaza","Sabor","EE. UU. y Canadá","ee-uu-y-canada"],["Mostaza","mostaza","Sabor","Escandinavia","escandinavia"],["Mostaza","mostaza","Sabor","India","india"],["Mostaza","mostaza","Ácido final","Reino Unido","reino-unido"],["Mostaza de Dijon","mostaza-de-dijon","Ácido final","Francia","francia"],["Mostaza en polvo","mostaza-en-polvo","Sabor","Japón","japon"],["Mozzarella de búfala","mozzarella-de-bufala","Ácido final","Italia","italia"],["Naranja","naranja","Ácido de cocción","Brasil","brasil"],["Naranja","naranja","Ácido de cocción","Caribe","caribe"],["Naranja","naranja","Ácido de cocción","Centroamérica","centroamerica"],["Naranja","naranja","Ácido de cocción","Chile, Perú y Bolivia","chile-peru-y-bolivia"],["Naranja agria","naranja-agria","Ácido de cocción","México","mexico"],["Nata","nata","Grasa","Alemania","alemania"],["Nata","nata","Grasa","Francia","francia"],["Nori","nori","Sabor","Japón","japon"],["Nuez moscada","nuez-moscada","Sabor","África Occidental","africa-occidental"],["Nuez moscada","nuez-moscada","Sabor","Brasil","brasil"],["Nuez moscada","nuez-moscada","Sabor","EE. UU. y Canadá","ee-uu-y-canada"],["Nuez moscada","nuez-moscada","Sabor","Escandinavia","escandinavia"],["Nuez moscada","nuez-moscada","Sabor","Reino Unido","reino-unido"],["Orégano","oregano","Sabor","Argentina y Uruguay","argentina-y-uruguay"],["Orégano","oregano","Sabor","Caribe","caribe"],["Orégano","oregano","Sabor","Grecia y Chipre","grecia-y-chipre"],["Orégano","oregano","Sabor","Italia","italia"],["Orégano","oregano","Sabor","Mediterráneo","mediterraneo"],["Orégano","oregano","Sabor","México","mexico"],["Pan de masa madre","pan-de-masa-madre","Ácido final","Francia","francia"],["Pan pumpernickel","pan-pumpernickel","Ácido final","Alemania","alemania"],["Panch phoran","panch-phoran","Sabor","India","india"],["Paneer","paneer","Ácido final","India","india"],["Parmesano","parmesano","Ácido final","Italia","italia"],["Pasta de curry","pasta-de-curry","Ácido final","Tailandia","tailandia"],["Pasta de curry","pasta-de-curry","Sabor","Tailandia","tailandia"],["Pasta de soja fermentada","pasta-de-soja-fermentada","Ácido final","China","china"],["Pasta de soja fermentada","pasta-de-soja-fermentada","Ácido final","Corea","corea"],["Pecorino","pecorino","Ácido final","Italia","italia"],["Pepinillos cornichon","pepinillos-cornichon","Ácido final","Francia","francia"],["Perejil","perejil","Sabor","Alemania","alemania"],["Perejil","perejil","Sabor","Argentina y Uruguay","argentina-y-uruguay"],["Perejil","perejil","Sabor","Brasil","brasil"],["Perejil","perejil","Sabor","Chile, Perú y Bolivia","chile-peru-y-bolivia"],["Perejil","perejil","Sabor","EE. UU. y Canadá","ee-uu-y-canada"],["Perejil","perejil","Sabor","España","espana"],["Perejil","perejil","Sabor","Francia","francia"],["Perejil","perejil","Sabor","Grecia y Chipre","grecia-y-chipre"],["Perejil","perejil","Sabor","Irán","iran"],["Perejil","perejil","Sabor","Mediterráneo","mediterraneo"],["Perejil","perejil","Sabor","Norte de África","norte-de-africa"],["Perejil","perejil","Sabor","Reino Unido","reino-unido"],["Pericón","pericon","Sabor","Chile, Perú y Bolivia","chile-peru-y-bolivia"],["Perifollo","perifollo","Sabor","Francia","francia"],["Perilla","perilla","Sabor","Corea","corea"],["Perilla","perilla","Sabor","Vietnam","vietnam"],["Pimentón","pimenton","Sabor","Alemania","alemania"],["Pimentón","pimenton","Sabor","Argentina y Uruguay","argentina-y-uruguay"],["Pimentón","pimenton","Sabor","Caribe","caribe"],["Pimentón","pimenton","Sabor","EE. UU. y Canadá","ee-uu-y-canada"],["Pimentón","pimenton","Sabor","Europa del Este","europa-del-este"],["Pimentón dulce y ahumado","pimenton-dulce-y-ahumado","Sabor","España","espana"],["Pimienta blanca","pimienta-blanca","Sabor","Alemania","alemania"],["Pimienta de Jamaica","pimienta-de-jamaica","Sabor","Alemania","alemania"],["Pimienta de Jamaica","pimienta-de-jamaica","Sabor","Caribe","caribe"],["Pimienta de Jamaica","pimienta-de-jamaica","Sabor","Escandinavia","escandinavia"],["Pimienta de Jamaica","pimienta-de-jamaica","Sabor","Europa del Este","europa-del-este"],["Pimienta de Jamaica","pimienta-de-jamaica","Sabor","México","mexico"],["Pimienta de Sichuan","pimienta-de-sichuan","Sabor","China","china"],["Pimienta negra","pimienta-negra","Sabor","Alemania","alemania"],["Pimienta negra","pimienta-negra","Sabor","Brasil","brasil"],["Pimienta negra","pimienta-negra","Sabor","China","china"],["Pimienta negra","pimienta-negra","Sabor","EE. UU. y Canadá","ee-uu-y-canada"],["Pimienta negra","pimienta-negra","Sabor","Europa del Este","europa-del-este"],["Pimienta negra","pimienta-negra","Sabor","India","india"],["Pimienta negra","pimienta-negra","Sabor","Italia","italia"],["Pimienta negra","pimienta-negra","Sabor","Mediterráneo","mediterraneo"],["Piña","pina","Ácido final","Brasil","brasil"],["Pomelo","pomelo","Ácido final","Cuerno de África","cuerno-de-africa"],["Ponzu","ponzu","Ácido final","Japón","japon"],["Quatre épices","quatre-epices","Sabor","Francia","francia"],["Queso azul danés","queso-azul-danes","Ácido final","Escandinavia","escandinavia"],["Queso de cabra","queso-de-cabra","Ácido final","Francia","francia"],["Queso de cabra fresco","queso-de-cabra-fresco","Ácido final","España","espana"],["Queso en salmuera","queso-en-salmuera","Ácido final","Europa del Este","europa-del-este"],["Queso feta","queso-feta","Ácido final","Grecia y Chipre","grecia-y-chipre"],["Queso feta","queso-feta","Ácido final","Mediterráneo","mediterraneo"],["Queso fresco","queso-fresco","Ácido final","Centroamérica","centroamerica"],["Quesos frescos","quesos-frescos","Ácido final","México","mexico"],["Rábano picante","rabano-picante","Sabor","Alemania","alemania"],["Ras el hanout","ras-el-hanout","Sabor","Norte de África","norte-de-africa"],["Rau răm","rau-ram","Sabor","Vietnam","vietnam"],["Requeijão (queso crema)","requeijao-queso-crema","Ácido final","Brasil","brasil"],["Requesón","requeson","Ácido final","Cuerno de África","cuerno-de-africa"],["Romero","romero","Sabor","Francia","francia"],["Romero","romero","Sabor","Irán","iran"],["Romero","romero","Sabor","Italia","italia"],["Roquefort","roquefort","Ácido final","Francia","francia"],["Salad cream","salad-cream","Ácido final","Reino Unido","reino-unido"],["Salsa","salsa","Ácido final","México","mexico"],["Salsa de ají","salsa-de-aji","Ácido final","Centroamérica","centroamerica"],["Salsa de ají","salsa-de-aji","Ácido final","Chile, Perú y Bolivia","chile-peru-y-bolivia"],["Salsa de chile","salsa-de-chile","Ácido final","Mediterráneo","mediterraneo"],["Salsa de ciruela","salsa-de-ciruela","Ácido final","China","china"],["Salsa de menta","salsa-de-menta","Ácido final","Reino Unido","reino-unido"],["Salsa de ostras","salsa-de-ostras","Ácido final","China","china"],["Salsa de pescado","salsa-de-pescado","Ácido final","Tailandia","tailandia"],["Salsa de pescado","salsa-de-pescado","Ácido final","Vietnam","vietnam"],["Salsa de rábano picante","salsa-de-rabano-picante","Ácido final","Reino Unido","reino-unido"],["Salsa de soja","salsa-de-soja","Ácido final","China","china"],["Salsa de soja","salsa-de-soja","Ácido final","Corea","corea"],["Salsa de soja","salsa-de-soja","Ácido final","Japón","japon"],["Salsa hoisin","salsa-hoisin","Ácido final","Vietnam","vietnam"],["Salsa picante","salsa-picante","Ácido final","Cuerno de África","cuerno-de-africa"],["Salsa picante","salsa-picante","Ácido final","EE. UU. y Canadá","ee-uu-y-canada"],["Salsa picante piri piri","salsa-picante-piri-piri","Ácido final","Brasil","brasil"],["Salsa romesco","salsa-romesco","Ácido final","España","espana"],["Salsa tártara","salsa-tartara","Ácido final","Reino Unido","reino-unido"],["Salvia","salvia","Sabor","Francia","francia"],["Salvia","salvia","Sabor","Italia","italia"],["Sambal","sambal","Ácido final","Tailandia","tailandia"],["Schmaltz (grasa de pollo)","schmaltz-grasa-de-pollo","Grasa","Europa del Este","europa-del-este"],["Semilla de apio","semilla-de-apio","Sabor","Alemania","alemania"],["Semilla de eneldo","semilla-de-eneldo","Sabor","Alemania","alemania"],["Semillas de alcaravea","semillas-de-alcaravea","Sabor","Europa del Este","europa-del-este"],["Semillas de hinojo","semillas-de-hinojo","Sabor","Francia","francia"],["Semillas de hinojo","semillas-de-hinojo","Sabor","Italia","italia"],["Semillas de sésamo","semillas-de-sesamo","Sabor","China","china"],["Semillas de sésamo","semillas-de-sesamo","Sabor","Corea","corea"],["Setas shiitake","setas-shiitake","Sabor","Japón","japon"],["Shichimi togarashi","shichimi-togarashi","Sabor","Japón","japon"],["Shiso","shiso","Sabor","Japón","japon"],["Sidra","sidra","Ácido de cocción","Alemania","alemania"],["Sidra","sidra","Ácido de cocción","Francia","francia"],["Sidra","sidra","Ácido de cocción","Reino Unido","reino-unido"],["Skyr","skyr","Ácido final","Escandinavia","escandinavia"],["Smen","smen","Grasa","Cuerno de África","cuerno-de-africa"],["Smen (mantequilla fermentada)","smen-mantequilla-fermentada","Grasa","Norte de África","norte-de-africa"],["Sriracha","sriracha","Ácido final","Tailandia","tailandia"],["Suero de mantequilla","suero-de-mantequilla","Ácido final","EE. UU. y Canadá","ee-uu-y-canada"],["Suero de mantequilla","suero-de-mantequilla","Ácido final","India","india"],["Suero de mantequilla","suero-de-mantequilla","Ácido final","Reino Unido","reino-unido"],["Sumbala (algarroba africana fermentada)","sumbala-algarroba-africana-fermentada","Ácido final","África Occidental","africa-occidental"],["Tamari","tamari","Ácido final","Japón","japon"],["Tamarindo","tamarindo","Ácido final","Centroamérica","centroamerica"],["Tamarindo","tamarindo","Ácido final","India","india"],["Tej (vino de miel)","tej-vino-de-miel","Ácido de cocción","Cuerno de África","cuerno-de-africa"],["Tomate","tomate","Ácido final","África Occidental","africa-occidental"],["Tomate","tomate","Ácido final","Argentina y Uruguay","argentina-y-uruguay"],["Tomate","tomate","Ácido final","Brasil","brasil"],["Tomate","tomate","Ácido final","Caribe","caribe"],["Tomate","tomate","Ácido final","Centroamérica","centroamerica"],["Tomate","tomate","Ácido final","Chile, Perú y Bolivia","chile-peru-y-bolivia"],["Tomate","tomate","Ácido final","Cuerno de África","cuerno-de-africa"],["Tomate","tomate","Ácido final","EE. UU. y Canadá","ee-uu-y-canada"],["Tomate","tomate","Ácido final","Francia","francia"],["Tomate","tomate","Ácido final","Grecia y Chipre","grecia-y-chipre"],["Tomate","tomate","Ácido final","Italia","italia"],["Tomate","tomate","Ácido final","México","mexico"],["Tomate","tomate","Ácido final","Norte de África","norte-de-africa"],["Tomillo","tomillo","Sabor","Brasil","brasil"],["Tomillo","tomillo","Sabor","España","espana"],["Tomillo","tomillo","Sabor","Francia","francia"],["Tomillo","tomillo","Sabor","Mediterráneo","mediterraneo"],["Tomillo","tomillo","Sabor","México","mexico"],["Torta de arroz fermentada","torta-de-arroz-fermentada","Ácido final","India","india"],["Verduras encurtidas","verduras-encurtidas","Ácido final","China","china"],["Verjus","verjus","Ácido de cocción","Francia","francia"],["Vinagre","vinagre","Ácido de cocción","Brasil","brasil"],["Vinagre","vinagre","Ácido de cocción","China","china"],["Vinagre","vinagre","Ácido de cocción","Escandinavia","escandinavia"],["Vinagre","vinagre","Ácido de cocción","Grecia y Chipre","grecia-y-chipre"],["Vinagre","vinagre","Ácido de cocción","Irán","iran"],["Vinagre balsámico","vinagre-balsamico","Ácido final","Italia","italia"],["Vinagre blanco","vinagre-blanco","Ácido de cocción","Centroamérica","centroamerica"],["Vinagre blanco","vinagre-blanco","Ácido de cocción","EE. UU. y Canadá","ee-uu-y-canada"],["Vinagre blanco","vinagre-blanco","Ácido de cocción","México","mexico"],["Vinagre de arroz","vinagre-de-arroz","Ácido de cocción","Corea","corea"],["Vinagre de arroz","vinagre-de-arroz","Ácido de cocción","Japón","japon"],["Vinagre de arroz","vinagre-de-arroz","Ácido de cocción","Tailandia","tailandia"],["Vinagre de arroz","vinagre-de-arroz","Ácido de cocción","Vietnam","vietnam"],["Vinagre de dátil","vinagre-de-datil","Ácido de cocción","Mediterráneo","mediterraneo"],["Vinagre de dátil","vinagre-de-datil","Ácido de cocción","Norte de África","norte-de-africa"],["Vinagre de malta","vinagre-de-malta","Ácido de cocción","Reino Unido","reino-unido"],["Vinagre de sidra","vinagre-de-sidra","Ácido de cocción","Alemania","alemania"],["Vinagre de sidra","vinagre-de-sidra","Ácido de cocción","Caribe","caribe"],["Vinagre de sidra","vinagre-de-sidra","Ácido de cocción","EE. UU. y Canadá","ee-uu-y-canada"],["Vinagre de sidra","vinagre-de-sidra","Ácido de cocción","Europa del Este","europa-del-este"],["Vinagre de vino","vinagre-de-vino","Ácido de cocción","Alemania","alemania"],["Vinagre de vino","vinagre-de-vino","Ácido de cocción","Argentina y Uruguay","argentina-y-uruguay"],["Vinagre de vino","vinagre-de-vino","Ácido de cocción","EE. UU. y Canadá","ee-uu-y-canada"],["Vinagre de vino","vinagre-de-vino","Ácido de cocción","Europa del Este","europa-del-este"],["Vinagre de vino","vinagre-de-vino","Ácido de cocción","Francia","francia"],["Vinagre de vino","vinagre-de-vino","Ácido de cocción","Italia","italia"],["Vinagre negro","vinagre-negro","Ácido de cocción","China","china"],["Vinagres de vino y de jerez","vinagres-de-vino-y-de-jerez","Ácido de cocción","España","espana"],["Vino","vino","Ácido de cocción","África Occidental","africa-occidental"],["Vino","vino","Ácido de cocción","Alemania","alemania"],["Vino","vino","Ácido de cocción","Argentina y Uruguay","argentina-y-uruguay"],["Vino","vino","Ácido de cocción","Cuerno de África","cuerno-de-africa"],["Vino","vino","Ácido de cocción","EE. UU. y Canadá","ee-uu-y-canada"],["Vino","vino","Ácido de cocción","Escandinavia","escandinavia"],["Vino","vino","Ácido de cocción","España","espana"],["Vino","vino","Ácido de cocción","Europa del Este","europa-del-este"],["Vino","vino","Ácido de cocción","Francia","francia"],["Vino","vino","Ácido de cocción","Grecia y Chipre","grecia-y-chipre"],["Vino","vino","Ácido de cocción","Italia","italia"],["Vino","vino","Ácido de cocción","Mediterráneo","mediterraneo"],["Vino","vino","Ácido de cocción","Reino Unido","reino-unido"],["Vino de arroz","vino-de-arroz","Ácido de cocción","China","china"],["Vino de arroz","vino-de-arroz","Ácido de cocción","Corea","corea"],["Vino de arroz","vino-de-arroz","Ácido de cocción","Japón","japon"],["Vino de arroz","vino-de-arroz","Ácido de cocción","Tailandia","tailandia"],["Vino de arroz","vino-de-arroz","Ácido de cocción","Vietnam","vietnam"],["Vino de frutas","vino-de-frutas","Ácido de cocción","Reino Unido","reino-unido"],["Vino de palma","vino-de-palma","Ácido de cocción","África Occidental","africa-occidental"],["Wasabi","wasabi","Sabor","Japón","japon"],["Yogur","yogur","Ácido final","Grecia y Chipre","grecia-y-chipre"],["Yogur","yogur","Ácido final","India","india"],["Yogur","yogur","Ácido final","Irán","iran"],["Yogur","yogur","Ácido final","Mediterráneo","mediterraneo"],["Yogur y quark","yogur-y-quark","Ácido final","Europa del Este","europa-del-este"],["Yuzu","yuzu","Sabor","Japón","japon"],["Za'atar","za-atar","Sabor","Mediterráneo","mediterraneo"],["Zumaque","zumaque","Ácido final","Irán","iran"],["Zumaque","zumaque","Ácido final","Mediterráneo","mediterraneo"],["Zumaque","zumaque","Sabor","Mediterráneo","mediterraneo"],["Zumaque","zumaque","Ácido final","Norte de África","norte-de-africa"],["Zumaque","zumaque","Sabor","Norte de África","norte-de-africa"],["Zumo de lima","zumo-de-lima","Ácido de cocción","Tailandia","tailandia"]];
+const CATS = [
+  {name:"Grasa", cls:"grasa", slug:"grasa", desc:"Aporta cuerpo, textura y transporta el sabor."},
+  {name:"Ácido de cocción", cls:"cocc", slug:"acido-de-coccion", desc:"Se añade durante la cocción y equilibra la grasa."},
+  {name:"Ácido final", cls:"final", slug:"acido-final", desc:"Se añade al terminar, para despertar el plato."},
+  {name:"Sabor", cls:"sabor", slug:"sabor", desc:"Especias, hierbas y aromáticos que dan carácter."}
+];
+const CONTINENTES = [
+  {name:"Europa", h:94, s:34, l:55, ds:30, dl:23,
+   regions:["escandinavia","reino-unido","alemania","europa-del-este","francia","italia","grecia-y-chipre","mediterraneo","espana"]},
+  {name:"Norteamérica", h:26, s:66, l:57, ds:44, dl:24,
+   regions:["ee-uu-y-canada","mexico","centroamerica","caribe"]},
+  {name:"Sudamérica", h:46, s:74, l:58, ds:46, dl:24,
+   regions:["brasil","chile-peru-y-bolivia","argentina-y-uruguay"]},
+  {name:"Asia", h:152, s:30, l:54, ds:26, dl:22,
+   regions:["iran","india","tailandia","vietnam","china","corea","japon"]},
+  {name:"África", h:354, s:50, l:60, ds:38, dl:25,
+   regions:["cuerno-de-africa","norte-de-africa","africa-occidental"]}
+];
+const CAT_CLS = Object.fromEntries(CATS.map(c => [c.name, c.cls]));
+const CAT_ORDER = Object.fromEntries(CATS.map((c,i) => [c.name, i]));
+
+const fold = s => s.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase();
+const esc = s => s.replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const ROWS = DATA.map(r => ({
+  food:r[0], foodSlug:r[1], cat:r[2], region:r[3], regionSlug:r[4],
+  hay: fold(r[0]+" "+r[2]+" "+r[3])
+}));
+
+const byFood = new Map(), byRegion = new Map();
+for (const r of ROWS) {
+  if (!byFood.has(r.foodSlug)) byFood.set(r.foodSlug, {name:r.food, rows:[]});
+  byFood.get(r.foodSlug).rows.push(r);
+  if (!byRegion.has(r.regionSlug)) byRegion.set(r.regionSlug, {name:r.region, rows:[]});
+  byRegion.get(r.regionSlug).rows.push(r);
+}
+const col = new Intl.Collator("es");
+const foodList = [...byFood.entries()].sort((a,b) => col.compare(a[1].name, b[1].name));
+const regionList = [...byRegion.entries()].sort((a,b) => col.compare(a[1].name, b[1].name));
+
+const tag = c => `<span class="tag t-${CAT_CLS[c]}">${c}</span>`;
+const plural = (n, one, many) => `${n} ${n===1?one:many}`;
+
+/* ---------- estado del buscador ---------- */
+let query = "";
+let activeCats = new Set();
+
+function matches(r) {
+  if (activeCats.size && !activeCats.has(r.cat)) return false;
+  if (!query) return true;
+  return fold(query).split(/\s+/).filter(Boolean).every(t => r.hay.includes(t));
+}
+
+function renderResults() {
+  const groups = new Map();
+  for (const r of ROWS) {
+    if (!matches(r)) continue;
+    if (!groups.has(r.foodSlug)) groups.set(r.foodSlug, {name:r.food, slug:r.foodSlug, cats:[], regions:[]});
+    const g = groups.get(r.foodSlug);
+    if (!g.cats.includes(r.cat)) g.cats.push(r.cat);
+    g.regions.push(r);
+  }
+  const hits = [...groups.values()].sort((a,b) => col.compare(a.name, b.name));
+  document.getElementById("count").textContent =
+    plural(hits.length, "ingrediente", "ingredientes");
+  const box = document.getElementById("results");
+  if (!hits.length) {
+    box.innerHTML = `<p class="empty">Ningún ingrediente coincide con esa búsqueda.</p>`;
+    return;
+  }
+  box.innerHTML = `<table>
+    <thead><tr><th>Ingrediente</th><th>Categoría</th><th>Regiones</th></tr></thead>
+    <tbody>${hits.map(g => `<tr>
+      <td><a href="#/ingrediente/${g.slug}">${esc(g.name)}</a></td>
+      <td><span class="tags">${g.cats.sort((a,b) => CAT_ORDER[a]-CAT_ORDER[b]).map(tag).join("")}</span></td>
+      <td class="regions">${g.regions.sort((a,b) => col.compare(a.region,b.region))
+        .map(r => `<a href="#/region/${r.regionSlug}">${esc(r.region)}</a>`)
+        .join(`<span class="sep"> · </span>`)}</td>
+    </tr>`).join("")}</tbody></table>`;
+}
+
+function viewSearch() {
+  return `<div class="searchbar">
+      <label for="search">Buscar</label>
+      <input id="search" type="search" autocomplete="off" placeholder="Busca un ingrediente, una categoría o una región" value="${esc(query)}">
+      <button class="btn" id="clear" type="button">Limpiar</button>
+    </div>
+    <div class="filters" id="filters">${CATS.map(c =>
+      `<button type="button" class="f-${c.cls}" data-cat="${c.name}" aria-pressed="${activeCats.has(c.name)}">${c.name}</button>`
+    ).join("")}</div>
+    <p class="count" id="count"></p>
+    <div class="tablebox" id="results"></div>`;
+}
+
+function wireSearch() {
+  const input = document.getElementById("search");
+  input.addEventListener("input", () => { query = input.value; renderResults(); });
+  document.getElementById("clear").addEventListener("click", () => {
+    query = ""; input.value = ""; activeCats.clear();
+    document.querySelectorAll("#filters button").forEach(b => b.setAttribute("aria-pressed","false"));
+    input.focus(); renderResults();
+  });
+  document.getElementById("filters").addEventListener("click", e => {
+    const b = e.target.closest("button"); if (!b) return;
+    const c = b.dataset.cat;
+    activeCats.has(c) ? activeCats.delete(c) : activeCats.add(c);
+    b.setAttribute("aria-pressed", activeCats.has(c));
+    renderResults();
+  });
+  renderResults();
+}
+
+/* ---------- explorar ---------- */
+function subtabs(active) {
+  const items = [["categorias","Por categoría"],["ingredientes","Por ingrediente"],["regiones","Por región"]];
+  return `<nav class="subtabs">${items.map(([k,l]) =>
+    `<a href="#/explorar/${k}" aria-selected="${k===active}">${l}</a>`).join("")}</nav>`;
+}
+
+function viewCategorias() {
+  return subtabs("categorias") + CATS.map(c => {
+    const rows = ROWS.filter(r => r.cat === c.name);
+    const regions = [...new Set(rows.map(r => r.regionSlug))]
+      .sort((a,b) => col.compare(byRegion.get(a).name, byRegion.get(b).name));
+    const uniq = new Set(rows.map(r => r.foodSlug)).size;
+    return `<details class="cat">
+      <summary>${c.name} <span class="n">${plural(uniq,"ingrediente","ingredientes")} en ${regions.length} regiones</span></summary>
+      <div class="catbody">
+        <p class="sub" style="margin:0">${c.desc}</p>
+        ${regions.map(rs => `<div class="regblock">
+          <h4><a href="#/region/${rs}">${esc(byRegion.get(rs).name)}</a></h4>
+          <div class="inline-list">${rows.filter(r => r.regionSlug === rs)
+            .sort((a,b) => col.compare(a.food,b.food))
+            .map(r => `<a class="pill" href="#/ingrediente/${r.foodSlug}">${esc(r.food)}</a>`).join("")}</div>
+        </div>`).join("")}
+      </div></details>`;
+  }).join("");
+}
+
+function viewIngredientes() {
+  const groups = new Map();
+  for (const [slug, f] of foodList) {
+    const l = fold(f.name)[0].toUpperCase();
+    if (!groups.has(l)) groups.set(l, []);
+    groups.get(l).push([slug, f]);
+  }
+  return subtabs("ingredientes") +
+    `<p class="count">${plural(foodList.length,"ingrediente","ingredientes")}</p>
+     <div class="alpha">${[...groups].map(([letter, items]) => `<div class="alpha-group">
+       <div class="alpha-letter">${letter}</div>
+       <div class="linklist">${items.map(([slug,f]) =>
+         `<a href="#/ingrediente/${slug}">${esc(f.name)}</a>`).join("")}</div>
+     </div>`).join("")}</div>`;
+}
+
+function viewRegiones() {
+  return subtabs("regiones") +
+    `<p class="count">${plural(regionList.length,"región","regiones")}</p>
+     <div class="regiongrid">${regionList.map(([slug,r]) =>
+       `<a href="#/region/${slug}"><span>${esc(r.name)}</span><span class="n">${r.rows.length}</span></a>`
+     ).join("")}</div>`;
+}
+
+/* ---------- fichas ---------- */
+// Ingredientes que más regiones comparten con este, de mayor a menor coincidencia.
+function companions(slug, regions, max = 5) {
+  const shared = new Map(), cats = new Map();
+  for (const r of ROWS) {
+    if (!regions.has(r.regionSlug)) continue;
+    if (!cats.has(r.foodSlug)) { cats.set(r.foodSlug, []); shared.set(r.foodSlug, new Set()); }
+    if (!cats.get(r.foodSlug).includes(r.cat)) cats.get(r.foodSlug).push(r.cat);
+    shared.get(r.foodSlug).add(r.regionSlug);
+  }
+  shared.delete(slug);
+  return [...shared]
+    .sort((a,b) => b[1].size - a[1].size || col.compare(byFood.get(a[0]).name, byFood.get(b[0]).name))
+    .slice(0, max)
+    .map(([s, set]) => ({
+      slug: s,
+      name: byFood.get(s).name,
+      cats: cats.get(s).sort((x,y) => CAT_ORDER[x] - CAT_ORDER[y]),
+      regions: [...set].sort((x,y) => col.compare(byRegion.get(x).name, byRegion.get(y).name))
+    }));
+}
+
+function viewIngrediente(slug) {
+  const f = byFood.get(slug);
+  if (!f) return notFound();
+  const rows = [...f.rows].sort((a,b) => col.compare(a.region,b.region));
+  const regions = new Set(f.rows.map(r => r.regionSlug));
+  const mates = companions(slug, regions);
+  return `<p class="crumbs"><a href="#/explorar/ingredientes">Ingredientes</a><span>/</span>${esc(f.name)}</p>
+    <h1 class="page-title">${esc(f.name)}</h1>
+    ${mates.length ? `<div class="group">
+      <div class="group-head"><h3>Se usa a menudo con</h3></div>
+      <div class="mates">${mates.map(m => `<div class="mate">
+        <div class="mate-top">
+          <a class="mate-name" href="#/ingrediente/${m.slug}">${esc(m.name)}</a>
+          <span class="tags">${m.cats.map(tag).join("")}</span>
+        </div>
+        <p class="mate-regs">${m.regions.map(rs =>
+          `<a href="#/region/${rs}">${esc(byRegion.get(rs).name)}</a>`)
+          .join(`<span class="sep"> · </span>`)}</p>
+      </div>`).join("")}</div>
+    </div>` : ""}
+    <div class="group">
+      <div class="group-head"><h3>Regiones que lo usan en su cocina</h3>
+        <span class="n">${rows.length}</span></div>
+      <div class="pairs">${rows.map(r => `<a class="pair" href="#/region/${r.regionSlug}">
+        <span class="name">${esc(r.region)}</span>${tag(r.cat)}</a>`).join("")}</div>
+    </div>`;
+}
+
+function viewRegion(slug) {
+  const g = byRegion.get(slug);
+  if (!g) return notFound();
+  const cats = [...new Set(g.rows.map(r => r.cat))].sort((a,b) => CAT_ORDER[a]-CAT_ORDER[b]);
+  return `<p class="crumbs"><a href="#/explorar/regiones">Regiones</a><span>/</span>${esc(g.name)}</p>
+    <h1 class="page-title">${esc(g.name)}</h1>
+    ${cats.map(c => {
+      const items = g.rows.filter(r => r.cat === c).sort((a,b) => col.compare(a.food,b.food));
+      return `<div class="group">
+        <div class="group-head"><h3>${tag(c)}</h3><span class="n">${items.length}</span></div>
+        <div class="inline-list">${items.map(r =>
+          `<a class="pill" href="#/ingrediente/${r.foodSlug}">${esc(r.food)}</a>`).join("")}</div>
+      </div>`;
+    }).join("")}`;
+}
+
+function notFound() {
+  return `<h1 class="page-title">No encontrado</h1>
+    <p class="sub">Esa página no existe. <a href="#/">Volver a la búsqueda</a>.</p>`;
+}
+
+/* ---------- ruedas (continente / región / ingrediente) ---------- */
+const R0 = 78, R1 = 190, R2 = 320, R3 = 540, VB = 556;
+const rad = a => a * Math.PI / 180;
+const pt = (r,a) => `${(r*Math.sin(rad(a))).toFixed(2)} ${(-r*Math.cos(rad(a))).toFixed(2)}`;
+
+function sector(r0, r1, a0, a1) {
+  const big = (a1 - a0) > 180 ? 1 : 0;
+  return `M${pt(r1,a0)}A${r1} ${r1} 0 ${big} 1 ${pt(r1,a1)}`
+       + `L${pt(r0,a1)}A${r0} ${r0} 0 ${big} 0 ${pt(r0,a0)}Z`;
+}
+
+// Etiqueta radial; se omite si el sector es más estrecho que la altura del texto.
+function radialLabel(txt, a0, a1, r0, r1, fs, cls) {
+  const a = (a0 + a1) / 2;
+  if (rad(a1 - a0) * ((r0 + r1) / 2) < fs * 1.1) return "";
+  const room = (r1 - r0) - 12, wide = fs * 0.53;
+  let t = txt;
+  if (t.length * wide > room) t = t.slice(0, Math.max(2, Math.floor(room / wide) - 1)).trim() + "…";
+  const flip = a > 180;
+  const tr = `rotate(${(a-90).toFixed(2)}) translate(${flip ? r1 : r0},0)` + (flip ? " rotate(180)" : "");
+  return `<text class="${cls}" transform="${tr}" x="6" dy="0.33em" font-size="${fs}">${esc(t)}</text>`;
+}
+
+const darkMQ = matchMedia("(prefers-color-scheme: dark)");
+const isDark = () => {
+  const t = document.documentElement.dataset.theme;
+  return t ? t === "dark" : darkMQ.matches;
+};
+// La rueda vive en el tema de la página: en oscuro baja la luminosidad en vez de invertir el tono.
+const hsl = (c, d) => isDark()
+  ? `hsl(${c.h} ${c.ds}% ${Math.min(40, c.dl + d * 0.62)}%)`
+  : `hsl(${c.h} ${c.s}% ${Math.min(86, c.l + d)}%)`;
+
+function wheelSVG(cat) {
+  const rows = ROWS.filter(r => r.cat === cat.name);
+  const step = 360 / rows.length;
+  const buckets = new Map();
+  for (const r of rows) {
+    if (!buckets.has(r.regionSlug)) buckets.set(r.regionSlug, []);
+    buckets.get(r.regionSlug).push(r);
+  }
+  let a = 0;
+  const arcs = [], regs = [], foods = [];
+
+  for (const cont of CONTINENTES) {
+    const present = cont.regions.filter(rs => buckets.has(rs));
+    if (!present.length) continue;
+    const contStart = a;
+    present.forEach((rs, i) => {
+      const items = buckets.get(rs).sort((x,y) => col.compare(x.food, y.food));
+      const regStart = a, regEnd = a + items.length * step;
+      const alt = i % 2;
+      items.forEach((r, j) => {
+        const f0 = a, f1 = a + step;
+        foods.push(`<a href="#/ingrediente/${r.foodSlug}"><title>${esc(r.food)} · ${esc(r.region)}</title>`
+          + `<path d="${sector(R2, R3, f0, f1)}" fill="${hsl(cont, 20 + alt*3 + (j%2?2:0))}"/></a>`
+          + radialLabel(r.food, f0, f1, R2, R3, 8.6, "lbl-food"));
+        a = f1;
+      });
+      regs.push(`<a href="#/region/${rs}"><title>${esc(buckets.get(rs)[0].region)}</title>`
+        + `<path d="${sector(R1, R2, regStart, regEnd)}" fill="${hsl(cont, 11 + alt*4)}"/></a>`
+        + radialLabel(buckets.get(rs)[0].region, regStart, regEnd, R1, R2, 10, "lbl-reg"));
+    });
+    arcs.push(`<path d="${sector(R0, R1, contStart, a)}" fill="${hsl(cont, 0)}"/>`
+      + radialLabel(cont.name, contStart, a, R0, R1, 12.5, "lbl-cont"));
+  }
+
+  return `<svg viewBox="${-VB} ${-VB} ${VB*2} ${VB*2}" width="${VB*2}" height="${VB*2}"
+      role="img" aria-label="Rueda de ${esc(cat.name)}: continente, región e ingrediente">
+    <g class="ring-food">${foods.join("")}</g>
+    <g class="ring-reg">${regs.join("")}</g>
+    <g class="ring-cont">${arcs.join("")}</g>
+    <circle class="hub" r="${R0}"/>
+    <text class="lbl-hub" y="-4" text-anchor="middle" font-size="21">${esc(cat.name)}</text>
+    <text class="lbl-hub-n" y="18" text-anchor="middle" font-size="11">${rows.length} en la rueda</text>
+  </svg>`;
+}
+
+function viewRuedas(slug) {
+  const cat = CATS.find(c => c.slug === slug) || CATS[0];
+  return `<nav class="subtabs">${CATS.map(c =>
+      `<a href="#/ruedas/${c.slug}" aria-selected="${c === cat}">${c.name}</a>`).join("")}</nav>
+    <h1 class="page-title">${cat.name}</h1>
+    <p class="sub">${cat.desc} De dentro afuera: continente, región e ingrediente. Toca cualquier gajo para abrir su ficha.</p>
+    <div class="bleed"><div class="wheelbox">${wheelSVG(cat)}</div>
+      <p class="wheel-hint">Desplaza la rueda en horizontal si no te cabe entera.</p></div>`;
+}
+
+/* ---------- enrutado ---------- */
+function route() {
+  const parts = (location.hash.replace(/^#\/?/, "").split("/")).filter(Boolean);
+  const view = document.getElementById("view");
+  let onSearch = false, html, heading = null;
+
+  if (parts[0] === "explorar") {
+    const sub = {ingredientes:["Ingredientes", viewIngredientes],
+                 regiones:["Regiones", viewRegiones]}[parts[1]] || ["Categorías", viewCategorias];
+    heading = sub[0]; html = sub[1]();
+  } else if (parts[0] === "ruedas") {
+    heading = "Ruedas"; html = viewRuedas(parts[1]);
+  } else if (parts[0] === "ingrediente") {
+    html = viewIngrediente(parts[1]);
+  } else if (parts[0] === "region") {
+    html = viewRegion(parts[1]);
+  } else {
+    html = viewSearch(); onSearch = true;
+  }
+
+  view.innerHTML = html;
+  if (onSearch) wireSearch();
+
+  const section = onSearch ? "buscar" : parts[0] === "ruedas" ? "ruedas" : "explorar";
+  for (const s of ["buscar","explorar","ruedas"])
+    document.getElementById("tab-" + s).setAttribute("aria-selected", s === section);
+  const name = heading || view.querySelector(".page-title")?.textContent.trim();
+  document.title = onSearch || !name ? "Salt Fat Acid Heat" : name + " · Salt Fat Acid Heat";
+}
+
+/* ---------- tema claro / oscuro ---------- */
+// "sistema" devuelve el tema con el que llegó la página; los otros dos lo fijan.
+const HOST_THEME = document.documentElement.dataset.theme || null;
+const MODES = {
+  system: {label:"Tema: el del sistema", icon:'<circle cx="12" cy="12" r="8"/><path d="M12 4v16" /><path d="M12 5a7 7 0 0 1 0 14z" fill="currentColor" stroke="none"/>'},
+  light:  {label:"Tema: claro", icon:'<circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2M12 19.5v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M2.5 12h2M19.5 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"/>'},
+  dark:   {label:"Tema: oscuro", icon:'<path d="M20 14.2A8.2 8.2 0 0 1 9.8 4a8.4 8.4 0 1 0 10.2 10.2z"/>'}
+};
+const ORDER = ["system","light","dark"];
+
+let mode = (() => { try { return localStorage.getItem("tema") || "system"; } catch { return "system"; } })();
+
+function applyTheme() {
+  const root = document.documentElement;
+  if (mode === "system") {
+    HOST_THEME ? root.dataset.theme = HOST_THEME : delete root.dataset.theme;
+  } else {
+    root.dataset.theme = mode;
+  }
+  const btn = document.getElementById("theme");
+  btn.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${MODES[mode].icon}</svg>`;
+  btn.setAttribute("aria-label", MODES[mode].label);
+  btn.title = MODES[mode].label + " (pulsa para cambiar)";
+}
+
+document.getElementById("theme").addEventListener("click", () => {
+  mode = ORDER[(ORDER.indexOf(mode) + 1) % ORDER.length];
+  try { localStorage.setItem("tema", mode); } catch {}
+  applyTheme();
+});
+applyTheme();
+
+const repaintWheel = () => { if (location.hash.startsWith("#/ruedas")) route(); };
+darkMQ.addEventListener("change", repaintWheel);
+new MutationObserver(repaintWheel)
+  .observe(document.documentElement, {attributes:true, attributeFilter:["data-theme"]});
+
+addEventListener("hashchange", () => { route(); scrollTo(0,0); });
+route();
+</script>
